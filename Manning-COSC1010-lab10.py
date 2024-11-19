@@ -1,12 +1,9 @@
-# Your Name Here
+# Madison Manning
 # UWYO COSC 1010
-# Submission Date
-# Lab XX
-# Lab Section: 
-# Sources, people worked with, help given to: 
-# your
-# comments
-# here
+# 10/19/2024
+# Lab 10
+# Lab Section: 10
+# Sources, people worked with, help given to: Special thanks to Paige and Eric
 
 #import modules you will need 
 
@@ -16,7 +13,6 @@ from pathlib import Path
 def get_hash(to_hash):
     """You can use """
     return sha256(to_hash.encode('utf-8')).hexdigest().upper()
-
 
 
 # Files and Exceptions
@@ -43,3 +39,40 @@ def get_hash(to_hash):
 # Hash each individual password and compare it against the stored hash.
 # - When you find the match, print the plaintext version of the password.
 # - End your loop.
+
+hash_string = ""
+hash_text = ""
+password = ""
+password_found = False
+
+try:
+    imp_hash = Path("hash")
+    hash_text = imp_hash.read_text()
+except:
+    print(f"Hash not found, please upload")
+else:
+    pass
+
+try:
+    imp_path = Path("rockyou.txt")
+    imp_prompt = imp_path.read_text()
+    passes = imp_prompt.splitlines()
+except:
+    print(f"File not found, try again")
+else:
+    for string in passes:
+        hash_string = get_hash(string)
+        if hash_string == hash_text:
+            password = string
+            password_found = True
+            break
+        else:
+            pass
+finally:
+    if password_found == True:
+        print(f"The password is {password}")
+    else:
+        print(f"The password could not be found")
+
+
+
